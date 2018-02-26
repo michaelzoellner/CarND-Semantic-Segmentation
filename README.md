@@ -36,10 +36,31 @@ into several functions:
 extract the handles/pointers to the layers that will be used to build the FCN.
 * ***layers*** builds the fully-convolutional neural network. As it will be 
 used multiple times, I decided to define the 1x1 convolution function 
-inside the layer function. The layout of the FCN was carried over from 
-[J. Long, E. Shelhamer, T.Darrell. Fully Convolutional Networks for Semantic Segmentation.](https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf)
+inside the layer function. The layout of the FCN was adopted from**FCN-8s**in 
+[J. Long, E. Shelhamer, T.Darrell. Fully Convolutional Networks for Semantic Segmentation](https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf), see below.
+* ***optimize*** sets the necessary optimizer used for training. Taking a
+look back on the Traffic Sign Classifier project in term 1 helped a lot in 
+order to define this function.
+* ***train_nn*** is the actual training function for the neural network. 
+Batches of images with the correct labels are fed to the optimizer. Again, 
+a lot of the necessary lines were taken over or adapted from the term 1 project.
+* ***run*** is the routine calling all other functions in order to 
+create the Tensorflow session, set up and train the neural network. In the 
+end, a course-provided helper function saves the inference results as PNGs.
+Examples are shown below in the "Inference Results" section.
+
 
 ![FCN layout](FCN_architecture_long_shelhamer.png)
+
+## Inference results
+
+![Result1](runs/1519540586.553018/um_000001.png)
+
+![Result2](runs/1519540586.553018/um_000003.png)
+
+![Result3](runs/1519540586.553018/um_000014.png)
+
+
 
 ## Original README information by Udacity
 

@@ -1,4 +1,48 @@
 # Semantic Segmentation
+
+## Aim of the project
+
+The aim of the semantic segmentation project is to label the pixels of
+a road in images with the use of neural networks. In contrast to the
+"Vehicle Detection" or "Traffic Sign Classifier" projects in Term 1,
+pixel-by-pixel spatial information should be kept and written to the
+images after inference.
+
+## Applied techniques
+
+This project builds a Fully-Convolutional network (FCN). FCNs consist
+of several (convolutional) encoder layers that extract certain
+information, just as in a convolutional neural network (CNN). In
+comparism to CNNs, these convolutions are not followed by
+fully-connected layers but 1x1 convolutions, that allow "matrix
+multiplication with spatial information". The next layers are
+transposed convolutions, that result in an output layer of the same
+size as the initial input layer. The FCN is completed by adding "skip
+connections", that allow to preserve certain spatial information by
+skipping part of the encoding and decoding layers.
+
+In this project, the encoding part of the FCN will not be trained.
+Instead, a pre-trained and "frozen" network (VGG16) will be used.
+In order to keep the training effort on a manageable level, just the
+decoding layers will be trained ("Transfer Learning").
+
+## Approach
+
+As with the other projects of the Self-Driving Car Nano-Degree, most of the 
+code was [provided by Udacity](https://github.com/udacity/CarND-Semantic-Segmentation). 
+All open To Dos are found within the main.py script, which is divided 
+into several functions:
+* ***load_vgg*** is used to load the frozen "VGG16" neural network and 
+extract the handles/pointers to the layers that will be used to build the FCN.
+* ***layers*** builds the fully-convolutional neural network. As it will be 
+used multiple times, I decided to define the 1x1 convolution function 
+inside the layer function. The layout of the FCN was carried over from 
+[J. Long, E. Shelhamer, T.Darrell. Fully Convolutional Networks for Semantic Segmentation.](https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf)
+
+![FCN layout](FCN_architecture_long_shelhamer.png)
+
+## Original README information by Udacity
+
 ### Introduction
 In this project, you'll label the pixels of a road in images using a Fully Convolutional Network (FCN).
 

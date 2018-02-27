@@ -146,7 +146,7 @@ def run():
     runs_dir = './runs'
     tests.test_for_kitti_dataset(data_dir)
 
-    epochs = 20
+    epochs = 1 #20
     batch_size = 10
 
     # Download pretrained vgg model
@@ -180,6 +180,11 @@ def run():
         sess.run(tf.global_variables_initializer())
         train_nn(sess, epochs, batch_size, get_batches_fn, training_operation,
                  cross_entropy_loss,w1,correct_label,keep,learning_rate)
+
+        # Save the trained network
+        saver = tf.train.Saver()
+        saver.save(sess, 'cnn')
+        print("Model saved")
 
         # TODO: Save inference data using helper.save_inference_samples
         helper.save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep, w1)
